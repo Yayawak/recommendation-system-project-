@@ -29,7 +29,7 @@ model = tensorflow.keras.Sequential([
 # img = "dataset/images/1163.jpg"
 # img = "dataset/myntradataset/images/1526.jpg"
 
-img = "dataset/myntradataset/images/57488.jpg"
+img = "../model/dataset/myntradataset/images/57488.jpg"
 
 
 # we are using a sample image for testing the recommendation of the model
@@ -46,11 +46,15 @@ norm_result = result / np.linalg.norm(result)
 neighbor = NearestNeighbors(n_neighbors=5, algorithm='brute',metric='cosine')
 neighbor.fit(feature_list)
 
-distance, index = neighbor.kneighbors([norm_result])
-print(index)
+distance, indexs = neighbor.kneighbors([norm_result])
+print(indexs)
 
-for ind in index[0]:
+filenames = ["../model/" + oldname  for oldname in filenames]
+
+for ind in indexs[0]:
     print(ind)
+    # print(filenames)
     temp = cv2.imread(filenames[ind])
+    print(temp)
     cv2.imshow('output',cv2.resize(temp,(500,500)))
     cv2.waitKey(1000)
