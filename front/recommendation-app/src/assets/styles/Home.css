@@ -1,4 +1,29 @@
 .home-page {
-    padding: 20px;
-    text-align: center;
-  }
+  padding: 20px;
+  text-align: left;
+  position: relative;
+}
+
+.search-bar-container {
+  width: 22%;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.search-results-container {
+  min-width: 200px;
+  padding-left: 30px;
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  width: 90%;
+  z-index: 20;
+}
+
+.button-group-container {
+  margin-top: 10px;
+  width: 100%;
+}
