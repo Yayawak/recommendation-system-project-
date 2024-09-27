@@ -1,4 +1,35 @@
 .home-page {
+<<<<<<< HEAD
     padding: 20px;
     text-align: center;
   }
+=======
+  padding: 20px;
+  text-align: left;
+  position: relative;
+}
+
+.search-bar-container {
+  width: 22%;
+  padding-left: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.search-results-container {
+  min-width: 200px;
+  padding-left: 30px;
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  width: 90%;
+  z-index: 20;
+}
+
+.button-group-container {
+  margin-top: 10px;
+  width: 100%;
+}
+>>>>>>> 2419497515bc312a3b782f263e3c3dff2911f8f0
