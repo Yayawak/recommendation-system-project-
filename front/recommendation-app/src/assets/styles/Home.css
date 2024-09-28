@@ -1,4 +1,9 @@
 .home-page {
+<<<<<<< HEAD
+    padding: 20px;
+    text-align: center;
+  }
+=======
   padding: 20px;
   text-align: left;
   position: relative;
@@ -27,3 +32,4 @@
   margin-top: 10px;
   width: 100%;
 }
+>>>>>>> 2419497515bc312a3b782f263e3c3dff2911f8f0
