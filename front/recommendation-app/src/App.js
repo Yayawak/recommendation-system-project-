@@ -1,20 +1,104 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Home from './pages/Home';
-import Recommendation from './pages/Recommendation';
+import { useState, useEffect } from "react";
+import { Toaster } from "sonner";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./ThemeContext";
+import { Button } from "./components/button";
+import Sidebar from './components/Sidebar'; // Your sidebar component
+import Home from './pages/Home'; // Your Home component
+import Recommendation from './pages/Recommendation'; // Your Recommendation component
 
-function App() {
+const queryClient = new QueryClient();
+
+// const ThemeToggle = () => {
+//   const { setTheme, theme } = useTheme();
+
+//   return (
+//     <Button
+//       variant="outline"
+//       size="icon"
+//       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+//       className="fixed top-4 right-4 z-50"
+//     >
+//       <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+//       <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+//       <span className="sr-only">Toggle theme</span>
+//     </Button>
+//   );
+// };
+
+// const ScrollToTopButton = () => {
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   useEffect(() => {
+//     const toggleVisibility = () => {
+//       if (window.pageYOffset > 300) {
+//         setIsVisible(true);
+//       } else {
+//         setIsVisible(false);
+//       }
+//     };
+
+//     window.addEventListener("scroll", toggleVisibility);
+
+//     return () => window.removeEventListener("scroll", toggleVisibility);
+//   }, []);
+
+//   const scrollToTop = () => {
+//     window.scrollTo({
+//       top: 0,
+//       behavior: "smooth"
+//     });
+//   };
+
+//   return (
+//     <>
+//       {isVisible && (
+//         <Button
+//           onClick={scrollToTop}
+//           className="fixed bottom-4 right-4 z-50"
+//         >
+//           Back to Top
+//         </Button>
+//       )}
+//     </>
+//   );
+// };
+
+const App = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <Router>
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Recommendation" element={<Recommendation />} />
-      </Routes>
-    </Router>
-
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <TooltipProvider>
+          <Toaster />
+          <BrowserRouter>
+            <div className="flex min-h-screen relative">
+              {/* <Button
+                className="lg:hidden fixed top-4 left-4 z-50"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+              >
+                <MenuIcon className="h-6 w-6" />
+              </Button> */}
+              <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+              <main className="flex-1 p-4 lg:ml-64">
+                {/* <div className="mb-16">
+                  <ThemeToggle />
+                </div> */}
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/Recommendation" element={<Recommendation />} />
+                </Routes>
+              </main>
+            </div>
+            {/* <ScrollToTopButton /> */}
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
-}
+};
 
 export default App;

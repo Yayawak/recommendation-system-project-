@@ -116,13 +116,13 @@ const Sidebar = () => {
               style={{ 
                 marginTop: '20px', 
                 padding: '10px 20px',
-                backgroundColor: '#f0c040',
+                backgroundColor: '#8C8C8C',
                 border: 'none',
-                color: '#333',
+                color: '#000000',
                 cursor: 'pointer'
               }}
             >
-              Upload and Get Recommendations
+              Get Recommendations
             </button>
 
             <button onClick={toggleModal} className="close-modal">
