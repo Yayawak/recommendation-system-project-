@@ -75,7 +75,7 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <BrowserRouter>
-            <div className="flex min-h-screen relative">
+            <div>
               {/* <Button
                 className="lg:hidden fixed top-4 left-4 z-50"
                 onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -83,7 +83,7 @@ const App = () => {
                 <MenuIcon className="h-6 w-6" />
               </Button> */}
               <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-              <main className="flex-1 p-4 lg:ml-64">
+              <main >
                 {/* <div className="mb-16">
                   <ThemeToggle />
                 </div> */}
