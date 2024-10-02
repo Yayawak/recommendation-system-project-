@@ -13,8 +13,13 @@ from sklearn.neighbors import NearestNeighbors
 import cv2
 import matplotlib.pyplot as plt
 
-feature_list = pickle.load(open('embiddings.pkl','rb'))
-filenames = pickle.load(open('filenames.pkl','rb'))
+current_dir = os.path.dirname(__file__)
+embiddings_path = os.path.join(current_dir, 'embiddings.pkl')
+filenames_path = os.path.join(current_dir, 'filenames.pkl')
+
+
+feature_list = pickle.load(open(embiddings_path,'rb'))
+filenames = pickle.load(open(filenames_path,'rb'))
 
 class Predictor:
     def __init__(self):
@@ -45,8 +50,9 @@ class Predictor:
         print("in indices of most similar image is ")
         print(indices)
 
-        return indices
+        # return indices
 
+        return [filenames[i].split('/')[2] for i in indices]
         # return [cv2.imread(filenames[i]) for i in indices]
 
         # for ind in indices[0]:
@@ -88,8 +94,9 @@ def predict_from_image_name(name_without_extension):
 
     print(img_file)
 
-    similare_item_indices = predictor.predict(img_file)
-    sims = [cv2.imread(filenames[i]) for i in similare_item_indices]
+    filename_sims = predictor.predict(img_file)
+    # sims = [cv2.imread(filenames[i]) for i in similare_item_indices]
+    sims = [cv2.imread(f) for f in filename_sims]
     sims = [cv2.cvtColor(img, cv2.COLOR_BGR2RGB) for img in sims]
 
     # print(sims[0])
@@ -117,5 +124,5 @@ def predict_from_image_name(name_without_extension):
 # img_path = "dataset/myntradataset/images/1526.jpg"
 #  this row came from myntradataset folder -> collect from it
 # 1530,Men,Apparel,Topwear,Jackets,Red,Fall,2010,Sports,Puma Men Ferrari Track Jacket
-predict_from_image_name("1530")
+# predict_from_image_name("1530")
 

@@ -1,8 +1,13 @@
-from flask import Flask
+from model.prediction import predictor
+import numpy as np
+import cv2
 
-# if __name__ == '__main__':
-#     print("main program started")
-
+from flask import (
+    Flask, 
+    # render_template, 
+    request,
+    jsonify
+)
 
 # ! how to run backend server 
 # flask --app server run
@@ -18,15 +23,25 @@ def hello_world():
 class AI:
     ...
 
-@app.route("/predict")
-def predict():
-#     
-#  "imageData": "http://amazon/jkk00.png"
-# url = body['imaegData']
-# img = urlReadImg(url)
-#  // AI
-#     
-#     
-    
+@app.route("/api/predict/byImageFile", methods=['POST'])
+def predictByImageFile():
+    data = {
+    }
+    if request.method == 'POST':
+        file = request.files.get('img')
+        if file and file.filename != '': 
+            data['msg'] = f'success get {file.filename}'
+            # Read the image file and convert to NumPy array
+            file_bytes = np.frombuffer(file.read(), np.uint8)
+            img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
-    return "<p>Result is ....</p>"
+            predicted_filenames = predictor.predict(img)
+            data['data'] = predicted_filenames
+
+        else:
+            data['msg'] = f"need file named 'img' to predict."
+            
+    return jsonify(data), 200
+
+
+app.run(debug=True, port=4000)
