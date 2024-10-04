@@ -8,6 +8,7 @@ import { Button } from "./components/button";
 import Sidebar from './components/Sidebar'; // Your sidebar component
 import Home from './pages/Home'; // Your Home component
 import Recommendation from './pages/Recommendation'; // Your Recommendation component
+import ProductDetail from './pages/ProductDetail'; // import ProductDetail
 
 const queryClient = new QueryClient();
 
@@ -90,6 +91,8 @@ const App = () => {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/Recommendation" element={<Recommendation />} />
+                  <Route path="/" element={<Home />} />
+                  <Route path="/product/:id" element={<ProductDetail />} /> 
                 </Routes>
               </main>
             </div>

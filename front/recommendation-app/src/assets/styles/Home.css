@@ -82,10 +82,13 @@ justify-content: center;
 }
 
 .card-content {
+  text-decoration: none;
   padding: 15px;
 }
 
 .card-title {
+  text-decoration: none;
   font-size: 1.25rem;
   font-weight: 600;
+  color: #000;
 }
