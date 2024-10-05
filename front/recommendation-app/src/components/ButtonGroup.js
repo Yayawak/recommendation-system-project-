@@ -10,7 +10,7 @@ const ButtonGroup = () => {
             color="primary"
             orientation="horizontal"
             size="small"
-            spacing={2}
+            className="MUIButtonGroup"
         >
             <Button>Shirt</Button>
             <Button>T-shirt</Button>
