@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar'; // Your sidebar component
 import Home from './pages/Home'; // Your Home component
 import Recommendation from './pages/Recommendation'; // Your Recommendation component
 import ProductDetail from './pages/ProductDetail'; // import ProductDetail
+import MobileMenu from "./components/MobileMenu";
 
 const queryClient = new QueryClient();
 
@@ -29,43 +30,43 @@ const queryClient = new QueryClient();
 //   );
 // };
 
-// const ScrollToTopButton = () => {
-//   const [isVisible, setIsVisible] = useState(false);
+const ScrollToTopButton = () => {
+  const [isVisible, setIsVisible] = useState(false);
 
-//   useEffect(() => {
-//     const toggleVisibility = () => {
-//       if (window.pageYOffset > 300) {
-//         setIsVisible(true);
-//       } else {
-//         setIsVisible(false);
-//       }
-//     };
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
 
-//     window.addEventListener("scroll", toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
 
-//     return () => window.removeEventListener("scroll", toggleVisibility);
-//   }, []);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
 
-//   const scrollToTop = () => {
-//     window.scrollTo({
-//       top: 0,
-//       behavior: "smooth"
-//     });
-//   };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 
-//   return (
-//     <>
-//       {isVisible && (
-//         <Button
-//           onClick={scrollToTop}
-//           className="fixed bottom-4 right-4 z-50"
-//         >
-//           Back to Top
-//         </Button>
-//       )}
-//     </>
-//   );
-// };
+  return (
+    <>
+      {isVisible && (
+        <Button
+          onClick={scrollToTop}
+          className="fixed bottom-4 right-4 z-50"
+        >
+          Back to Top
+        </Button>
+      )}
+    </>
+  );
+};
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -83,7 +84,7 @@ const App = () => {
               >
                 <MenuIcon className="h-6 w-6" />
               </Button> */}
-              <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+              <MobileMenu />
               <main >
                 {/* <div className="mb-16">
                   <ThemeToggle />
@@ -96,7 +97,8 @@ const App = () => {
                 </Routes>
               </main>
             </div>
-            {/* <ScrollToTopButton /> */}
+            <ScrollToTopButton />
+            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           </BrowserRouter>
         </TooltipProvider>
       </ThemeProvider>

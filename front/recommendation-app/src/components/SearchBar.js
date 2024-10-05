@@ -1,35 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { FaSearch } from "react-icons/fa";
+import "../assets/styles/SearchBar.css";
 
-import { FaSearch } from "react-icons/fa"
-import "../assets/styles/SearchBar.css"
-
-const SearchBar = ({ setResults }) => {
-    const [input, setInput] = useState("")
+const SearchBar = ({ setSearchTerm  }) => {
+    const [input, setInput] = useState("");
 
     const fetchData = (value) => {
         fetch("https://jsonplaceholder.typicode.com/users")
             .then((response) => response.json())
-            .then(json => {
+            .then((json) => {
                 const results = json.filter((user) => {
-                    return value && user && user.name && user.name.toLowerCase().includes(value)
-                })
-                setResults(results)
-            })
-    }
+                    return value && user && user.name && user.name.toLowerCase().includes(value.toLowerCase());
+                });
+                setSearchTerm (results);
+            });
+    };
 
     const handleChange = (value) => {
-        setInput(value)
-        fetchData(value)
-    }
+        setInput(value);
+        fetchData(value);
+    };
 
     return (
         <div className='input-wrapper'>
             <FaSearch id="search-icon" />
-            <input placeholder='..What are you looking for?'
+            <input
+                placeholder="..What are you looking for?"
                 value={input}
-                onChange={(e) => handleChange(e.target.value)} />
+                onChange={(e) => handleChange(e.target.value)}
+            />
         </div>
-    )
-}
+    );
+};
 
-export default SearchBar
+export default SearchBar;
