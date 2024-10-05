@@ -1,7 +1,17 @@
-import math
-from flask import Flask, jsonify, request
-import pandas as pd
-import os
+from model.prediction import predictor
+import numpy as np
+import cv2
+
+from flask import (
+    Flask, 
+    # render_template, 
+    request,
+    jsonify
+)
+
+# ! how to run backend server 
+# flask --app server run
+# [server] is name of file (server.py)
 
 from model.prediction import predict_from_image_name_json
 
@@ -22,96 +32,25 @@ def hello_world():
 class AI:
     ...
 
-@app.route("/predict")
-def predict():
-#     
-#  "imageData": "http://amazon/jkk00.png"
-# url = body['imaegData']
-# img = urlReadImg(url)
-#  // AI
-#     
-#     
-    return "<p>Result is ....</p>"
-
-@app.route('/api/fashion/searchbyuser', methods=['GET', 'POST'])
-def searchByUser():
-    styles = read_styles_csv()  # อ่านข้อมูลจาก CSV
-    search_results = []
-    total_results = 0  # ตัวแปรเก็บจำนวนผลลัพธ์ทั้งหมดที่ค้นพบ
-
+@app.route("/api/predict/byImageFile", methods=['POST'])
+def predictByImageFile():
+    data = {
+    }
     if request.method == 'POST':
-        query = request.form.get('query')
+        file = request.files.get('img')
+        if file and file.filename != '': 
+            data['msg'] = f'success get {file.filename}'
+            # Read the image file and convert to NumPy array
+            file_bytes = np.frombuffer(file.read(), np.uint8)
+            img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
-        # ถ้าผู้ใช้ไม่กรอกข้อมูลในช่องค้นหา
-        if not query:
-            return jsonify({"message": "กรุณากรอกคำค้นหา"}), 400  # ส่งสถานะ 400 พร้อมข้อความแจ้งเตือน
+            predicted_filenames = predictor.predict(img)
+            data['data'] = predicted_filenames
 
-        query = query.lower()
-        # ค้นหาสินค้าที่ตรงกับคำค้นหาใน productDisplayName
-        search_results = [style for style in styles if isinstance(style['productDisplayName'], str) and query in style['productDisplayName'].lower()]
+        else:
+            data['msg'] = f"need file named 'img' to predict."
+            
+    return jsonify(data), 200
 
-        # จำกัดจำนวนผลลัพธ์ไม่ให้เกิน 100 ชิ้น
-        search_results = search_results[:100]
 
-        # เก็บจำนวนผลลัพธ์ทั้งหมด
-        total_results = len(search_results)
-
-        # ตรวจสอบและจัดการค่า NaN หรือ None ก่อนสร้าง JSON
-        for result in search_results:
-            # ตรวจสอบและจัดการค่า NaN หรือ None สำหรับทุกฟิลด์ที่เกี่ยวข้อง
-            for key, value in result.items():
-                if value is None or (isinstance(value, float) and math.isnan(value)):
-                    result[key] = ""  # กำหนดค่าว่างถ้าค่าเป็น NaN หรือ None
-
-            # เพิ่ม image path สำหรับแต่ละผลลัพธ์ โดยใช้ id.jpg
-            result['image'] = f"{result['id']}.jpg"
-
-    # ส่งผลลัพธ์ทั้งหมดในรูปแบบ JSON รวมถึง image ที่สร้างจาก id
-    return jsonify({"total_results": total_results, "results": search_results})
-
-@app.route('/api/fashion/searchbytype', methods=['GET', 'POST'])
-def searchByType():
-    styles = read_styles_csv()  # อ่านข้อมูลจาก CSV
-    search_results = []
-    total_results = 0  # ตัวแปรเก็บจำนวนผลลัพธ์ทั้งหมดที่ค้นพบ
-
-    if request.method == 'POST':
-        query = request.form.get('query')
-
-        # ถ้าผู้ใช้ไม่กรอกข้อมูลในช่องค้นหา
-        if not query:
-            return jsonify({"message": "กรุณากรอกคำค้นหา"}), 400  # ส่งสถานะ 400 พร้อมข้อความแจ้งเตือน
-
-        query = query.lower()
-        # ค้นหาสินค้าที่ตรงกับคำค้นหาใน articleType
-        # search_results = [style for style in styles if isinstance(style['articleType'], str) and query in style['articleType'].lower()]
-        search_results = [style for style in styles if isinstance(style['articleType'], str) and style['articleType'].lower() == query]
-
-        # จำกัดจำนวนผลลัพธ์ไม่ให้เกิน 100 ชิ้น
-        search_results = search_results[:100]
-
-        # เก็บจำนวนผลลัพธ์ทั้งหมด
-        total_results = len(search_results)
-
-        # ตรวจสอบและจัดการค่า NaN หรือ None ก่อนสร้าง JSON
-        for result in search_results:
-            # ตรวจสอบและจัดการค่า NaN หรือ None สำหรับทุกฟิลด์ที่เกี่ยวข้อง
-            for key, value in result.items():
-                if value is None or (isinstance(value, float) and math.isnan(value)):
-                    result[key] = ""  # กำหนดค่าว่างถ้าค่าเป็น NaN หรือ None
-
-            # เพิ่ม image path สำหรับแต่ละผลลัพธ์ โดยใช้ id.jpg
-            result['image'] = f"{result['id']}.jpg"
-
-    # ส่งผลลัพธ์ทั้งหมดในรูปแบบ JSON รวมถึง image ที่สร้างจาก id
-    return jsonify({"total_results": total_results, "results": search_results})
-
-@app.route('/api/predict/<int:image_id>', methods=['GET'])
-def predict_image(image_id):
-    result = predict_from_image_name_json(str(image_id))  # เรียกใช้ฟังก์ชัน predict ที่ส่งคืนค่า JSON
-    if "error" in result:
-        return jsonify(result), 404
-    return jsonify(result)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+app.run(debug=True, port=4000)
