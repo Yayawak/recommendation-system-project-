@@ -5,7 +5,6 @@ import SearchResultsList from '../components/SearchResultsList';
 import ButtonGroup from '../components/ButtonGroup';
 import { Link } from 'react-router-dom';
 
-
 const fashionItems = [
   { id: 1, src: "https://i.pinimg.com/564x/12/7f/0d/127f0d2ba8c221f9969084b1a95c7079.jpg", alt: "Pink dress" },
   { id: 2, src: "https://i.pinimg.com/474x/a7/cd/21/a7cd21ef9f6690022b99192eac700a90.jpg", alt: "Black pants" },
@@ -15,12 +14,10 @@ const fashionItems = [
   { id: 6, src: "https://i.pinimg.com/474x/5f/47/a7/5f47a736d11efc985e48252bd8e0a369.jpg", alt: "Blue jeans" },
 ];
 
-
-
 const Home = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); 
 
-  const filteredItems = (fashionItems || []).filter((item) =>
+  const filteredItems = fashionItems.filter((item) =>
     item.alt.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -29,7 +26,7 @@ const Home = () => {
       <div className='search-bar-container'>
         <SearchBar setSearchTerm={setSearchTerm} />
         <div className="search-results-container">
-          <SearchResultsList searchTerm={searchTerm} />
+          <SearchResultsList results={filteredItems} />
         </div>
         <div className="button-group-container">
           <ButtonGroup />
