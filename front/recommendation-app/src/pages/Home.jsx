@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import '../assets/styles/Home.css';
 import SearchBar from '../components/SearchBar';
-import SearchResultsList from '../components/SearchResultsList';
 import ButtonGroup from '../components/ButtonGroup';
 import { Link } from 'react-router-dom';
 
