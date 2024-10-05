@@ -3,7 +3,10 @@ from flask import Flask, jsonify, request
 import pandas as pd
 import os
 
+from model.prediction import predict_from_image_name_json
+
 app = Flask(__name__)
+CORS(app)
 
 # path = os.getcwd()
 # print(path)
@@ -102,6 +105,13 @@ def searchByType():
 
     # ส่งผลลัพธ์ทั้งหมดในรูปแบบ JSON รวมถึง image ที่สร้างจาก id
     return jsonify({"total_results": total_results, "results": search_results})
+
+@app.route('/api/predict/<int:image_id>', methods=['GET'])
+def predict_image(image_id):
+    result = predict_from_image_name_json(str(image_id))  # เรียกใช้ฟังก์ชัน predict ที่ส่งคืนค่า JSON
+    if "error" in result:
+        return jsonify(result), 404
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True)
