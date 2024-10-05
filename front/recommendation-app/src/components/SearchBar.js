@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { FaSearch } from "react-icons/fa";
-import "../assets/styles/SearchBar.css";
+import React, { useState } from 'react'
+import { FaSearch } from "react-icons/fa"
+import "../assets/styles/SearchBar.css"
 
-const SearchBar = ({ setSearchTerm  }) => {
-    const [input, setInput] = useState("");
+const SearchBar = ({ setResults }) => {
+    const [input, setInput] = useState("")
 
     const fetchData = (value) => {
         fetch("https://jsonplaceholder.typicode.com/users")
@@ -12,7 +12,7 @@ const SearchBar = ({ setSearchTerm  }) => {
                 const results = json.filter((user) => {
                     return value && user && user.name && user.name.toLowerCase().includes(value.toLowerCase());
                 });
-                setSearchTerm (results);
+                setResults (results);
             });
     };
 
