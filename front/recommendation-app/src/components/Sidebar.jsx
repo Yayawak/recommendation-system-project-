@@ -30,14 +30,15 @@ const Sidebar = () => {
       formData.append("file", selectedFile);
 
       try {
-        const response = await axios.post("http://localhost:5000/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        // const response = await axios.post("http://localhost:5000/upload", formData, {
+        //   headers: {
+        //     "Content-Type": "multipart/form-data",
+        //   },
+        // });
 
-        setRecommendedImages(response.data.recommendedImages);
+        // setRecommendedImages(response.data.recommendedImages);
         navigate('/Recommendation');
+        
       } catch (error) {
         console.error("Error uploading the file:", error);
       }

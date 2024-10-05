@@ -15,30 +15,83 @@ const fashionItems = [
 ];
 
 const Home = () => {
-  const [searchTerm, setSearchTerm] = useState(""); 
+  const [results, setResults] = useState([]); // Store the search results
 
-  const filteredItems = fashionItems.filter((item) =>
-    item.alt.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredItems = fashionItems.filter((item) =>
+  //   item.alt.toLowerCase().includes(results.toLowerCase())
+  // );
+
+  const searchByUser = (query) => {
+    fetch('http://45.154.27.170:5000/api/fashion/searchbyuser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'query': query,
+        }),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.total_results > 0) {
+            setResults(data.results); // Set the results based on API response
+        } else {
+            setResults([]); // No results found
+        }
+    })
+    .catch((error) => {
+        console.error('Error fetching search results:', error);
+        setResults([]); // Handle error
+    });
+};
+
+// Function to search by category (triggered by buttons like Shirt, T-shirt, etc.)
+const searchByCategory = (category) => {
+    fetch('http://45.154.27.170:5000/api/fashion/searchbytype', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'query': category,
+        }),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.total_results > 0) {
+            setResults(data.results); // Set the results based on category
+        } else {
+            setResults([]);
+        }
+    })
+    .catch((error) => {
+        console.error('Error fetching category results:', error);
+        setResults([]); // Handle error
+    });
+};
 
   return (
     <div className="home-page">
       <div className='search-bar-container'>
-        <SearchBar setSearchTerm={setSearchTerm} />
-        <div className="search-results-container">
-          <SearchResultsList results={filteredItems} />
-        </div>
+        {/* SearchBar triggers setResults when searching */}
+        <SearchBar setResults={searchByUser} />
+
+        {/* Button group to filter by category */}
         <div className="button-group-container">
-          <ButtonGroup />
+          <ButtonGroup searchByCategory={searchByCategory} />
         </div>
       </div>
       <div className="grid">
-        {filteredItems.length > 0 ? (
-          filteredItems.map((item) => (
+        {results.length > 0 ? (
+          results.map((item) => (
             <Link key={item.id} to={`/product/${item.id}`} className="card">
-              <img src={item.src} alt={item.alt} className="card-image" />
+              <img
+                src={`http://45.154.27.170:5000/static/images/${item.image}`}
+                alt={item.productDisplayName}
+                className="card-image"
+              />
               <div className="card-content">
-                <p className="card-title">{item.alt}</p>
+                <p className="card-title">{item.productDisplayName}</p>
               </div>
             </Link>
           ))

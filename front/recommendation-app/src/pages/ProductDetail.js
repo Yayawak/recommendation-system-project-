@@ -44,7 +44,8 @@ const ProductDetail = () => {
                     {relatedItems.map((relatedItem) => (
                         <div key={relatedItem.id} className="related-item">
                             <Link to={`/product/${relatedItem.id}`}>
-                                <img src={relatedItem.src} alt={relatedItem.alts} className="related-image" />
+                                <img src={`http://45.154.27.170:5000/static/images/${relatedItem.image}`}
+                                    alt={relatedItem.productDisplayName} className="related-image" />
                                 <p>{relatedItem.alts}</p>
                             </Link>
                         </div>

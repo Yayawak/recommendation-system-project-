@@ -1,28 +1,19 @@
-import React, { useState } from 'react'
-import { FaSearch } from "react-icons/fa"
-import "../assets/styles/SearchBar.css"
+import React, { useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import '../assets/styles/SearchBar.css';
 
 const SearchBar = ({ setResults }) => {
-    const [input, setInput] = useState("")
-
-    const fetchData = (value) => {
-        fetch("https://jsonplaceholder.typicode.com/users")
-            .then((response) => response.json())
-            .then((json) => {
-                const results = json.filter((user) => {
-                    return value && user && user.name && user.name.toLowerCase().includes(value.toLowerCase());
-                });
-                setResults (results);
-            });
-    };
+    const [input, setInput] = useState('');
 
     const handleChange = (value) => {
         setInput(value);
-        fetchData(value);
+        if (value) {
+            setResults(value); // Pass the search input to the parent component for API search
+        }
     };
 
     return (
-        <div className='input-wrapper'>
+        <div className="input-wrapper">
             <FaSearch id="search-icon" />
             <input
                 placeholder="..What are you looking for?"

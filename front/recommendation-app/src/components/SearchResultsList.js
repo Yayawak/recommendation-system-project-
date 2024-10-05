@@ -1,22 +1,19 @@
-import React from 'react'
-import SearchResult from "./SearchResult"
-
-import "../assets/styles/SearchResultsList.css"
+import React from 'react';
+import SearchResult from './SearchResult';
+import '../assets/styles/SearchResultsList.css';
 
 const SearchResultsList = ({ results = [] }) => {
-    // Check if results is an array
-    if (!Array.isArray(results)) {
-        return <p>No results</p>; // Optionally display a message if results is not valid
+    if (!Array.isArray(results) || results.length === 0) {
+        return <p>No results found.</p>;
     }
-    return (
-        <div className='results-list'>
-            {
-                results.map((result, id) => {
-                    return <SearchResult result={result} key={id} />
-                })
-            }
-        </div>
-    )
-}
 
-export default SearchResultsList
+    return (
+        <div className="results-list">
+            {results.map((result, id) => (
+                <SearchResult key={id} result={result} />
+            ))}
+        </div>
+    );
+};
+
+export default SearchResultsList;
