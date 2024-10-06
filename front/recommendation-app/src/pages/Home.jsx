@@ -83,7 +83,8 @@ const searchByCategory = (category) => {
       <div className="grid">
         {results.length > 0 ? (
           results.map((item) => (
-            <Link key={item.id} to={`/product/${item.id}`} className="card">
+            // ใน map() function ของผลลัพธ์สินค้า
+            <Link to={`/product/${item.id}`} key={item.id} className="card">
               <img
                 src={`http://45.154.27.170:5000/static/images/${item.image}`}
                 alt={item.productDisplayName}
