@@ -22,6 +22,7 @@ const ButtonGroup = ({ searchByCategory }) => {
             <Button onClick={() => searchByCategory('Handbags')}>Handbags</Button>
             <Button onClick={() => searchByCategory('Belts')}>Belts</Button>
             <Button onClick={() => searchByCategory('Sunglasses')}>Sunglasses</Button>
+            <Button onClick={() => searchByCategory('Boxers')}>Boxers</Button>
         </MUIButtonGroup>
     );
 };
