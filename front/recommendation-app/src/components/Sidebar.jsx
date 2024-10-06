@@ -14,6 +14,7 @@ const Sidebar = () => {
   const [recommendedImages, setRecommendedImages] = useState([]);
   const [fileName, setFileName] = useState("No selected file");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const [images, setImages] = useState([]);//URL
   const [showUploadSection, setShowUploadSection] = useState(true); //add
@@ -77,10 +78,16 @@ const Sidebar = () => {
     //setShowSidebar(true); // แสดง Sidebar ใหม่
   };
 
-
-
-
-
+  const buttonStyle = {
+    marginTop: '20px',
+    padding: '10px 20px',
+    backgroundColor: isHovered ? '#e0e0e0' : '#ffffff',
+    border: 'none',
+    color: '#333',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease', // Smooth transition effect
+    borderRadius: '4px'
+  };
 
   // const toggleModal = () => {
   //   setIsModalOpen(!isModalOpen);
@@ -112,14 +119,9 @@ const Sidebar = () => {
 
         <button
           onClick={toggleModal}
-          style={{
-            marginTop: '20px',
-            padding: '10px 20px',
-            backgroundColor: '#ffffff',
-            border: 'none',
-            color: '#333',
-            cursor: 'pointer'
-          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          style={buttonStyle}
         >
           Upload File
         </button>
@@ -251,6 +253,8 @@ const Sidebar = () => {
                   cursor: 'pointer',
                   marginTop: '10px'
                 }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#666666'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#8C8C8C'}
               >
                 Get Recommendations
               </button>
