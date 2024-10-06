@@ -103,8 +103,11 @@ img {
 
 .image-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: left;
+    overflow-x: auto;
+    padding: 20px;
+    margin: 0 20px;
 }
 
 .image-item {
