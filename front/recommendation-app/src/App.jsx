@@ -11,6 +11,10 @@ import Recommendation from './pages/Recommendation'; // Your Recommendation comp
 import ProductDetail from './pages/ProductDetail'; // import ProductDetail
 import MobileMenu from "./components/MobileMenu";
 
+// App.jsx (หรือ App.js)
+
+
+
 const queryClient = new QueryClient();
 
 // const ThemeToggle = () => {
@@ -97,6 +101,9 @@ const App = () => {
                   <Route path="/" element={<Home />} />
                   <Route path="/" element={<ProductDetail />} />
                   <Route path="/product/:imageId" element={<ProductDetail />} />
+
+                  <Route path="/" element={<Recommendation />} />
+                  <Route path="/image-details/:imageId" element={<ProductDetail />} /> {/* เส้นทางที่ใช้ imageId */}
                 </Routes>
               </main>
             </div>

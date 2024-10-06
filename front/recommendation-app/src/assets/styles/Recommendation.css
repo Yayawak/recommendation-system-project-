@@ -1,89 +1,25 @@
-/* Recommendation.css */
-/* Recommendation.css */
-
-
-
-
-
-
-
-.App {
-    text-align: center;
-    /* จัดกลางข้อความทั้งหมด */
-}
-
-.similar-images-container {
-    margin-top: 20px;
-}
-
-.similar-images-container h1 {
-    margin-bottom: 20px;
-}
-
-.similar-images-container .image-grid {
+.recommendation-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    /* ระยะห่างระหว่างการ์ด */
     justify-content: center;
-    /* จัดกลางการ์ดทั้งหมด */
+    gap: 20px;
+    /* Space between the cards */
 }
 
-.image-card {
-    flex: 1 1 calc(20% - 15px);
-    /* กำหนดให้การ์ดมีความกว้างประมาณ 20% */
-    max-width: 200px;
-    /* จำกัดความกว้างสูงสุดของการ์ด */
+.recommendation-container img {
+    width: 200px;
+    /* Set a fixed width */
     height: 200px;
-    /* ความสูงของการ์ด */
-    overflow: hidden;
-    /* ซ่อนเนื้อหาที่เกิน */
-    border: 1px solid #ddd;
-    /* ขอบการ์ด */
-    border-radius: 8px;
-    /* มุมโค้งของการ์ด */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* เงาของการ์ด */
-    position: relative;
-    /* ตั้งค่า position เพื่อให้ใช้กับรูปภาพ */
-    transition: transform 0.3s ease;
-    /* การเคลื่อนไหวของการ์ด */
-}
-
-.image-card:hover {
-    transform: scale(1.05);
-    /* ขยายการ์ดเมื่อชี้ */
-}
-
-.similar-images-container .image-grid img {
-    width: 100%;
-    /* ทำให้ภาพเต็มการ์ด */
-    height: 100%;
-    /* ทำให้สูงเต็มการ์ด */
+    /* Set a fixed height */
     object-fit: cover;
-    /* ทำให้ภาพพอดีกับการ์ด */
-    cursor: pointer;
-    /* แสดงเคอร์เซอร์เป็นมือเมื่อชี้ที่ภาพ */
-    transition: transform 0.3s ease;
-    /* ทำให้มีการเคลื่อนไหว */
+    /* Ensures the image maintains its aspect ratio */
+    border-radius: 10px;
+    /* Optional: Adds rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: Adds a subtle shadow */
 }
 
-.similar-images-container .image-grid img:hover {
-    transform: scale(1.1);
-    /* ขยายภาพเมื่อชี้ */
-}
-
-.loading,
-.error {
+.recommendation-container a {
+    display: block;
     text-align: center;
-    color: #ff0000;
-    font-weight: bold;
-}
-
-.recommendation-title {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-
 }

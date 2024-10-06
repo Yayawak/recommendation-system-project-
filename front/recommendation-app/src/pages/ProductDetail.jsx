@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../assets/styles/ProductDetail.css';
 
 const ProductDetail = () => {
+
     const { imageId } = useParams();  // ดึงค่า imageId จาก URL
     console.log("Image ID from URL:", imageId); // ตรวจสอบว่าค่า imageId ไม่เป็น undefined
 

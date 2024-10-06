@@ -48,13 +48,15 @@ const Sidebar = () => {
       });
 
       // จัดการผลลัพธ์ที่ได้จาก API ที่นี่ (เช่น การตั้งค่า URL รูปภาพ)
+      const resultData = response.data;//รับเป็น json
       const imageUrls = response.data.similar_images.map((item) =>
         `http://45.154.27.170:5000/static/images/${item.image}`
       );
 
       setImages(imageUrls); // อัปเดตสถานะด้วย URL ของภาพที่คล้ายกัน
       //navigate('/Recommendation');
-      navigate('/recommendation', { state: { images: imageUrls } });
+      //navigate('/recommendation', { state: { images: imageUrls } });
+      navigate('/recommendation', { state: { images: imageUrls, jsonData: resultData } });
       setShowUploadSection(false);//add
 
     } catch (error) {
