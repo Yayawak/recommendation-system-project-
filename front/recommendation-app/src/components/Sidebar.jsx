@@ -43,7 +43,7 @@ const Sidebar = () => {
 
     try {
       // ส่งคำขอ POST ไปยัง API
-      const response = await axios.post('http://45.154.27.170:5000/api/predict/file', formData, {
+      const response = await axios.post('http://ffancy.xyz:5000/api/predict/file', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -52,7 +52,7 @@ const Sidebar = () => {
       // จัดการผลลัพธ์ที่ได้จาก API ที่นี่ (เช่น การตั้งค่า URL รูปภาพ)
       const resultData = response.data;//รับเป็น json
       const imageUrls = response.data.similar_images.map((item) =>
-        `http://45.154.27.170:5000/static/images/${item.image}`
+        `http://ffancy.xyz:5000/static/images/${item.image}`
       );
 
       setImages(imageUrls); // อัปเดตสถานะด้วย URL ของภาพที่คล้ายกัน
@@ -107,11 +107,12 @@ const Sidebar = () => {
       <nav className="sidebar">
         <ul className="">
           <Link to="/">
-            <h1 style={{ 
-            fontSize: '35px',
-            textAlign: 'left',
-            margin: '20px',
-            padding: 0}}>
+            <h1 style={{
+              fontSize: '35px',
+              textAlign: 'left',
+              margin: '20px',
+              padding: 0
+            }}>
               Fashion Recommender
             </h1>
           </Link>
@@ -152,8 +153,8 @@ const Sidebar = () => {
             flexDirection: 'column',
             alignItems: 'center'
           }}>
-            <button 
-              onClick={toggleModal} 
+            <button
+              onClick={toggleModal}
               style={{
                 position: 'absolute',
                 left: '250px',
@@ -174,7 +175,7 @@ const Sidebar = () => {
               alignItems: 'center',
               gap: '20px'
             }}>
-              
+
               <p>Upload your photo</p>
 
               <form
@@ -203,13 +204,13 @@ const Sidebar = () => {
                 />
 
                 {uploadedImage ? (
-                  <img src={uploadedImage} 
-                       style={{
-                         maxWidth: '100%',
-                         maxHeight: '180px',
-                         objectFit: 'contain'
-                       }} 
-                       alt={fileName} 
+                  <img src={uploadedImage}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '180px',
+                      objectFit: 'contain'
+                    }}
+                    alt={fileName}
                   />
                 ) : (
                   <>

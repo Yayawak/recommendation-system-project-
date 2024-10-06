@@ -15,11 +15,11 @@ const Home = () => {
   useEffect(() => {
     setIsLoading(true);
     setError(null);
-    
+
     console.log('Fetching initial items...'); // Debug log
-    
+
     // Try using the searchbyuser endpoint instead with an empty query
-    fetch('http://45.154.27.170:5000/api/fashion/searchbyuser', {
+    fetch('http://ffancy.xyz:5000/api/fashion/searchbyuser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -34,7 +34,7 @@ const Home = () => {
       })
       .then((data) => {
         console.log('API Response:', data);
-        
+
         if (data && data.results && data.results.length > 0) {
           // Get up to 8 random items from the results
           const shuffled = [...data.results].sort(() => 0.5 - Math.random());
@@ -43,7 +43,7 @@ const Home = () => {
           console.log('Selected items:', selected);
         } else {
           // If the first attempt fails, try with a very generic search term
-          return fetch('http://45.154.27.170:5000/api/fashion/searchbyuser', {
+          return fetch('http://ffancy.xyz:5000/api/fashion/searchbyuser', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -75,7 +75,7 @@ const Home = () => {
   const searchByUser = (query) => {
     setIsSearchPerformed(true);
     setIsLoading(true);
-    fetch('http://45.154.27.170:5000/api/fashion/searchbyuser', {
+    fetch('http://ffancy.xyz:5000/api/fashion/searchbyuser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -104,7 +104,7 @@ const Home = () => {
   const searchByCategory = (category) => {
     setIsSearchPerformed(true);
     setIsLoading(true);
-    fetch('http://45.154.27.170:5000/api/fashion/searchbytype', {
+    fetch('http://ffancy.xyz:5000/api/fashion/searchbytype', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -144,7 +144,7 @@ const Home = () => {
             // ใน map() function ของผลลัพธ์สินค้า
             <Link to={`/product/${item.id}`} key={item.id} className="card">
               <img
-                src={`http://45.154.27.170:5000/static/images/${item.image}`}
+                src={`http://ffancy.xyz:5000/static/images/${item.image}`}
                 alt={item.productDisplayName}
                 className="card-image"
               />
@@ -163,7 +163,7 @@ const Home = () => {
           initialItems.map((item) => (
             <Link key={item.id} to={`/product/${item.id}`} className="card">
               <img
-                src={`http://45.154.27.170:5000/static/images/${item.image}`}
+                src={`http://ffancy.xyz:5000/static/images/${item.image}`}
                 alt={item.productDisplayName}
                 className="card-image"
               />

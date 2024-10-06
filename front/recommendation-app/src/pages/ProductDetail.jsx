@@ -16,14 +16,14 @@ const ProductDetail = () => {
 
     // ฟังก์ชันสำหรับการดึงข้อมูลรูปภาพและรายละเอียดสินค้า
     const fetchProductDetails = async (imageId) => {
-        const apiUrl = `http://45.154.27.170:5000/api/predict/${imageId}`;
+        const apiUrl = `http://ffancy.xyz:5000/api/predict/${imageId}`;
 
         setLoading(true);
         setError('');
         try {
             const response = await axios.get(apiUrl);
             const imageUrls = response.data.similar_images.map((item) =>
-                `http://45.154.27.170:5000/static/images/${item.image}`
+                `http://ffancy.xyz:5000/static/images/${item.image}`
             );
             setImages(imageUrls);
             setProductDetails(response.data.similar_images[0]); // เก็บรายละเอียดสินค้าจาก API
@@ -54,7 +54,7 @@ const ProductDetail = () => {
                 <div className="product-Img">
                     <h2 className='ImgMain'></h2>
                     <img
-                        src={`http://45.154.27.170:5000/static/images/${mainImage}.jpg`}
+                        src={`http://ffancy.xyz:5000/static/images/${mainImage}.jpg`}
                         alt="Main"
                         style={{ width: '300px', cursor: 'pointer' }}
                     />
