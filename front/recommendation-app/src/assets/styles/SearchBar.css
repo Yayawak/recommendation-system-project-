@@ -24,7 +24,7 @@ input::placeholder {
 
 input {
     background-color: transparent;
-    text-align: left;
+    text-align: right;
     border: none;
     height: 100%;
     font-size: 1rem;
