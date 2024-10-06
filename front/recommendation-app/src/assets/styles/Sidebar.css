@@ -87,19 +87,3 @@ button:hover {
   cursor: pointer;
 }
 
-
-/* Add responsiveness */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    /* Full width on smaller screens */
-    height: auto;
-  }
-}
-
-.sidebar a {
-  text-decoration: none;
-  /* Remove underline */
-  color: inherit;
-  /* Keep the text color the same */
-}

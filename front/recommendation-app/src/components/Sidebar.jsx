@@ -114,7 +114,7 @@ const Sidebar = () => {
         >
           Upload File
         </button>
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
       </nav>
 
       {isModalOpen && showUploadSection && (

@@ -77,7 +77,7 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      {/* <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme"> */}
         <TooltipProvider>
           <Toaster />
           <BrowserRouter>
@@ -88,7 +88,7 @@ const App = () => {
               >
                 <MenuIcon className="h-6 w-6" />
               </Button> */}
-              <MobileMenu />
+              {/* <MobileMenu /> */}
               <main >
                 {/* <div className="mb-16">
                   <ThemeToggle />
@@ -107,11 +107,11 @@ const App = () => {
                 </Routes>
               </main>
             </div>
-            <ScrollToTopButton />
+            {/* <ScrollToTopButton /> */}
             <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           </BrowserRouter>
         </TooltipProvider>
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
     </QueryClientProvider>
   );
 };

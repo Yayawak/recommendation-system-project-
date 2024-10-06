@@ -38,7 +38,7 @@ const Home = () => {
         if (data && data.results && data.results.length > 0) {
           // Get up to 8 random items from the results
           const shuffled = [...data.results].sort(() => 0.5 - Math.random());
-          const selected = shuffled.slice(0, 8);
+          const selected = shuffled.slice(0, 20);
           setInitialItems(selected);
           console.log('Selected items:', selected);
         } else {
@@ -57,7 +57,7 @@ const Home = () => {
       .then((data) => {
         if (data && data.results && data.results.length > 0) {
           const shuffled = [...data.results].sort(() => 0.5 - Math.random());
-          const selected = shuffled.slice(0, 8);
+          const selected = shuffled.slice(0, 20);
           setInitialItems(selected);
         } else {
           setError('No items available');

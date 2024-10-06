@@ -1,6 +1,3 @@
-
-
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../assets/styles/Recommendation.css';
@@ -11,7 +8,7 @@ const Recommendation = () => {
 
   return (
     <div>
-      <h1>Recommendations</h1>
+      <p>Recommendations</p>
       <div className="recommendation-container"> {/* ใช้คลาส recommendation-container */}
         {images && images.map((image, index) => {
           const imageId = image.split('/').pop().split('.')[0]; // ดึง imageId จาก URL ของภาพ
