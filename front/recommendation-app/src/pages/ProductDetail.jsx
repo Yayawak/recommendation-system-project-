@@ -63,25 +63,25 @@ const ProductDetail = () => {
                 {/* แสดงรายละเอียดสินค้า */}
                 {productDetails && (
                     <div className="product-details">
-                        <h2>รายละเอียดสินค้า</h2>
-                        <p><strong>ชื่อสินค้า:</strong> {productDetails.productDisplayName}</p>
-                        <p><strong>หมวดหมู่:</strong> {productDetails.masterCategory}</p>
-                        <p><strong>หมวดหมู่ย่อย:</strong> {productDetails.subCategory}</p>
-                        <p><strong>สี:</strong> {productDetails.baseColour}</p>
-                        <p><strong>เพศ:</strong> {productDetails.gender}</p>
-                        <p><strong>ฤดูกาล:</strong> {productDetails.season}</p>
-                        <p><strong>การใช้งาน:</strong> {productDetails.usage}</p>
-                        <p><strong>ปี:</strong> {productDetails.year}</p>
+                        <p>Product Details</p>
+                        <p><strong>Product Name:</strong> {productDetails.productDisplayName}</p>
+                        <p><strong>Category:</strong> {productDetails.masterCategory}</p>
+                        <p><strong>Subcategory:</strong> {productDetails.subCategory}</p>
+                        <p><strong>Color:</strong> {productDetails.baseColour}</p>
+                        <p><strong>Gender:</strong> {productDetails.gender}</p>
+                        <p><strong>Season:</strong> {productDetails.season}</p>
+                        <p><strong>Usage:</strong> {productDetails.usage}</p>
+                        <p><strong>Year:</strong> {productDetails.year}</p>
                     </div>
                 )}
             </section>
 
-            {loading && <p>กำลังโหลด...</p>}
+            {loading && <h2>Loading...</h2>}
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
             {/* แสดงรูปที่คล้ายกัน */}
             <div>
-                <h2 className="recommendation-title">RECOMMENDATION</h2>
+                <h2 className="recommendation-title">These might be what you’re looking for!</h2>
                 <div className="image-container">
                     {images.length > 0 ? (
                         images.map((url, index) => {
@@ -98,7 +98,7 @@ const ProductDetail = () => {
                             );
                         })
                     ) : (
-                        <p>ยังไม่มีภาพที่แสดง</p>
+                        <h2>No images to display yet</h2>
                     )}
                 </div>
             </div>

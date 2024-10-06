@@ -8,7 +8,7 @@ const Recommendation = () => {
 
   return (
     <div>
-      <p>Recommendations</p>
+      <h1>Recommendations</h1>
       <div className="recommendation-container"> {/* ใช้คลาส recommendation-container */}
         {images && images.map((image, index) => {
           const imageId = image.split('/').pop().split('.')[0]; // ดึง imageId จาก URL ของภาพ

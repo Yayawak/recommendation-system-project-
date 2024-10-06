@@ -154,11 +154,11 @@ const Home = () => {
             </Link>
           ))
         ) : isSearchPerformed ? (
-          <p>No items found.</p>
+          <h2>No items found.</h2>
         ) : isLoading ? (
-          <p>Loading items...</p>
+          <h2>Loading items...</h2>
         ) : error ? (
-          <p>Error: {error}</p>
+          <h2>Error: {error}</h2>
         ) : initialItems.length > 0 ? (
           initialItems.map((item) => (
             <Link key={item.id} to={`/product/${item.id}`} className="card">
@@ -173,7 +173,7 @@ const Home = () => {
             </Link>
           ))
         ) : (
-          <p>No items available.</p>
+          <h2>No items available.</h2>
         )}
       </div>
     </div>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdCloudUpload, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
+import { X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle'; // Ensure this path is correct
 
 import '../assets/styles/Sidebar.css';
@@ -98,7 +99,15 @@ const Sidebar = () => {
     <div className="container">
       <nav className="sidebar">
         <ul className="">
-          <Link to="/"><h1>Fashion Recommender</h1></Link>
+          <Link to="/">
+            <h1 style={{ 
+            fontSize: '35px',
+            textAlign: 'left',
+            margin: '20px',
+            padding: 0}}>
+              Fashion Recommender
+            </h1>
+          </Link>
         </ul>
 
         <button
@@ -114,79 +123,138 @@ const Sidebar = () => {
         >
           Upload File
         </button>
-        {/* <ThemeToggle /> */}
+        <ThemeToggle />
       </nav>
 
       {isModalOpen && showUploadSection && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <form
-              className="upload-form"
-              onClick={() => document.querySelector(".input-field").click()}
-            >
-              <input
-                type="file"
-                accept="image/*"
-                className="input-field"
-                hidden
-                onChange={handleFileChange}
-              />
-
-              {uploadedImage ? (
-                <img src={uploadedImage} width={150} height={150} alt={fileName} />
-              ) : (
-                <>
-                  <MdCloudUpload color="#333" size={60} />
-                  <p>Browse Files to upload</p>
-                </>
-              )}
-            </form>
-
-            <section className="uploaded-row">
-              <AiFillFileImage color="#333" />
-              <span className="upload-content">
-                {fileName} -
-                <MdDelete
-                  onClick={() => {
-                    setFileName("No selected File");
-                    setUploadedImage(null);
-                    setSelectedFile(null);
-                  }}
-                  style={{ cursor: 'pointer', marginLeft: '10px' }}
-                />
-              </span>
-            </section>
-
-            <button
-              onClick={handleUpload}
+        <div className="modal-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000
+        }}>
+          <div className="modal-content" style={{
+            backgroundColor: '#fff',
+            padding: '40px',
+            borderRadius: '8px',
+            width: '90%',
+            maxWidth: '500px',
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}>
+            <button 
+              onClick={toggleModal} 
               style={{
-                marginTop: '20px',
-                padding: '10px 20px',
-                backgroundColor: '#8C8C8C',
+                position: 'absolute',
+                left: '250px',
+                top: '20px',
+                background: 'none',
                 border: 'none',
-                color: '#000000',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                padding: '8px'
               }}
             >
-              Get Recommendations
+              <X size={24} color="#333" />
             </button>
 
-            <button onClick={toggleModal} className="close-modal">
-              Close
-            </button>
+            <div style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '20px'
+            }}>
+              
+              <p>Upload your photo</p>
 
-            {recommendedImages.length > 0 && (
-              <>
-                <h2 style={{ marginTop: '20px' }}>Recommended Images</h2>
-                <div style={{ display: "flex", justifyContent: "space-around", flexDirection: "column" }}>
-                  {recommendedImages.map((image, index) => (
-                    <div key={index}>
-                      <img src={image} alt={`Recommendation ${index + 1}`} width="150" />
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
+              <form
+                className="upload-form"
+                onClick={() => document.querySelector(".input-field").click()}
+                style={{
+                  width: '100%',
+                  maxWidth: '300px',
+                  height: '200px',
+                  border: '2px dashed #ccc',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  backgroundColor: '#f8f8f8'
+                }}
+              >
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="input-field"
+                  hidden
+                  onChange={handleFileChange}
+                />
+
+                {uploadedImage ? (
+                  <img src={uploadedImage} 
+                       style={{
+                         maxWidth: '100%',
+                         maxHeight: '180px',
+                         objectFit: 'contain'
+                       }} 
+                       alt={fileName} 
+                  />
+                ) : (
+                  <>
+                    <MdCloudUpload color="#333" size={60} />
+                    <p style={{
+                      margin: '10px 0 0',
+                    }}>Browse Files to upload</p>
+                  </>
+                )}
+              </form>
+
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: '#666'
+              }}>
+                <AiFillFileImage />
+                <span>{fileName}</span>
+                {fileName !== "No selected file" && (
+                  <MdDelete
+                    onClick={() => {
+                      setFileName("No selected file");
+                      setUploadedImage(null);
+                      setSelectedFile(null);
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  />
+                )}
+              </div>
+
+              <button
+                onClick={handleUpload}
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  backgroundColor: '#8C8C8C',
+                  border: 'none',
+                  borderRadius: '4px',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  marginTop: '10px'
+                }}
+              >
+                Get Recommendations
+              </button>
+            </div>
           </div>
         </div>
       )}

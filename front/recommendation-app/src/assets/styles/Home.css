@@ -6,7 +6,7 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   transition: background-color 0.3s ease, color 0.3s ease;
-
+  font-style: italic;
   max-width: 72%;
   height: 80vh;
   margin-left: auto;

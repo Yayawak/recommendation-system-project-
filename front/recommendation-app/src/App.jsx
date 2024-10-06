@@ -77,7 +77,7 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme"> */}
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <TooltipProvider>
           <Toaster />
           <BrowserRouter>
@@ -111,7 +111,7 @@ const App = () => {
             <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           </BrowserRouter>
         </TooltipProvider>
-      {/* </ThemeProvider> */}
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };
