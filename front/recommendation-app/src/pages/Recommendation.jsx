@@ -35,7 +35,7 @@ const Recommendation = () => {
               to={`/image-details/${imageId}`} // ส่งเฉพาะ imageId ไปยังหน้าแสดงรายละเอียด
             >
               <img src={image} alt={`Recommendation ${index + 1}`} />
-              {productName && <p className="product-name">{productName}</p>} {/* แสดงชื่อสินค้า */}
+              {productName && <h2 className="product-name">{productName}</h2>} {/* แสดงชื่อสินค้า */}
 
             </Link>
           );
