@@ -5,6 +5,7 @@
     gap: 20px;
     overflow-x: auto;
     padding: 20px;
+
 }
 
 .recommendation-container img {
@@ -18,9 +19,55 @@
     /* Optional: Adds rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* Optional: Adds a subtle shadow */
+
 }
 
 .recommendation-container a {
     display: block;
     text-align: center;
+    text-decoration: none;
+}
+
+/* ส่วนสำหรับรูปภาพที่ผู้ใช้อัปโหลด */
+.uploaded-image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    /* เพิ่มระยะห่างระหว่างรูปที่อัปโหลดกับภาพแนะนำ */
+}
+
+.uploaded-image-container img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border: 4px solid #ccc;
+    border-radius: 10px;
+    /* มุมโค้งมน */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* เพิ่มเงา */
+
+    transition: transform 0.3s ease;
+    /* ทำให้การเปลี่ยนขนาดราบรื่น */
+}
+
+.uploaded-image-container img:hover {
+    transform: scale(1);
+    /* เพิ่มเอฟเฟกต์ขยายเมื่อ hover */
+}
+
+.product-name {
+    margin-top: 10px;
+    /* ระยะห่างระหว่างภาพกับชื่อสินค้า */
+    font-size: 16px;
+    color: #333;
+    /* กำหนดสีของชื่อสินค้า */
+    font-weight: bold;
+    text-align: center;
+    /* จัดข้อความให้อยู่ตรงกลาง */
+    text-decoration: none;
+    /* เอาเส้นขีดใต้ของชื่อสินค้าออก */
+    overflow: hidden;
+
+
+
 }

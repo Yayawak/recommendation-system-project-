@@ -58,7 +58,7 @@ const Sidebar = () => {
       setImages(imageUrls); // อัปเดตสถานะด้วย URL ของภาพที่คล้ายกัน
       //navigate('/Recommendation');
       //navigate('/recommendation', { state: { images: imageUrls } });
-      navigate('/recommendation', { state: { images: imageUrls, jsonData: resultData } });
+      navigate('/recommendation', { state: { images: imageUrls, jsonData: resultData, uploadedImage: uploadedImage } });
       setShowUploadSection(false);//add
 
     } catch (error) {
