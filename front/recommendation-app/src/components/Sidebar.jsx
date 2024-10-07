@@ -16,12 +16,11 @@ const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
-  const [images, setImages] = useState([]);//URL
-  const [showUploadSection, setShowUploadSection] = useState(true); //add
+  const [images, setImages] = useState([]);
+  const [showUploadSection, setShowUploadSection] = useState(true);
 
 
   const handleFileChange = (event) => {
-    // setSelectedFile(event.target.files[0]);
     const file = event.target.files[0];
     if (file != null) {
       setFileName(file.name);
@@ -37,45 +36,39 @@ const Sidebar = () => {
       return;
     }
 
-    // สร้าง form data เพื่อส่งไปยัง API
     const formData = new FormData();
-    formData.append('img', selectedFile); // ใช้ 'img' เป็น key ตามที่ API กำหนด
+    formData.append('img', selectedFile);
 
     try {
-      // ส่งคำขอ POST ไปยัง API
+
       const response = await axios.post('http://ffancy.xyz:5000/api/predict/file', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      // จัดการผลลัพธ์ที่ได้จาก API ที่นี่ (เช่น การตั้งค่า URL รูปภาพ)
-      const resultData = response.data;//รับเป็น json
+
+      const resultData = response.data;
       const imageUrls = response.data.similar_images.map((item) =>
         `http://ffancy.xyz:5000/static/images/${item.image}`
       );
 
-      setImages(imageUrls); // อัปเดตสถานะด้วย URL ของภาพที่คล้ายกัน
-      //navigate('/Recommendation');
-      //navigate('/recommendation', { state: { images: imageUrls } });
+      setImages(imageUrls);
       navigate('/recommendation', { state: { images: imageUrls, jsonData: resultData, uploadedImage: uploadedImage } });
-      setShowUploadSection(false);//add
+      setShowUploadSection(false);
 
     } catch (error) {
-      console.error('เกิดข้อผิดพลาด:', error); // จัดการข้อผิดพลาดที่เกิดขึ้น
+      console.error('เกิดข้อผิดพลาด:', error);
     }
   };
 
   const handleNewUpload = () => {
-    // รีเซ็ตค่าทั้งหมดเพื่อให้สามารถอัปโหลดภาพใหม่ได้
-
-    // รีเซ็ตค่าที่จำเป็นสำหรับการอัพโหลดใหม่
     setFileName("No selected file");
     setSelectedFile(null);
     setUploadedImage(null);
-    setImages([]); // รีเซ็ต URL ของภาพที่แนะนำ
-    setShowUploadSection(true); // แสดงส่วนการอัพโหลดใหม่
-    //setShowSidebar(true); // แสดง Sidebar ใหม่
+    setImages([]);
+    setShowUploadSection(true);
+
   };
 
   const buttonStyle = {
@@ -85,17 +78,14 @@ const Sidebar = () => {
     border: 'none',
     color: '#333',
     cursor: 'pointer',
-    transition: 'background-color 0.3s ease', // Smooth transition effect
+    transition: 'background-color 0.3s ease',
     borderRadius: '4px'
   };
 
-  // const toggleModal = () => {
-  //   setIsModalOpen(!isModalOpen);
-  // };
+
 
   const toggleModal = () => {
     if (isModalOpen) {
-      // ถ้า modal ถูกเปิดอยู่ ก็ให้ทำการรีเซ็ตเมื่อปิด modal
       handleNewUpload();
     }
     setIsModalOpen(!isModalOpen);
